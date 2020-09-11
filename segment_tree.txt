@@ -1,0 +1,44 @@
+// Segment tree for min query
+
+int a[maxN], tree[4 * maxN];
+
+void build(int left, int right, int node){
+    if(left == right){
+        tree[node] = a[left];
+        return;
+    }
+    int mid = left + (right - left) / 2;
+    build(left, mid, 2 * node);
+    build(mid + 1, right, 2 * node + 1);
+    tree[node] = min(tree[2 * node], tree[2 * node + 1]);
+    return;
+}
+
+void update(int left, int right, int node, int idx, int val){
+    if(left == right){
+        a[idx] = val;
+        tree[node] = val;
+        return;
+    }
+    int mid = left + (right - left) / 2;
+    if(idx > mid){
+        update(mid + 1, right, 2 * node + 1, idx, val);
+    }
+    else{
+        update(left, mid, 2 * node, idx, val);
+    }
+    tree[node] = min(tree[2 * node], tree[2 * node + 1]);
+}
+
+int query(int left, int right, int node, int l_idx, int r_idx){
+    if(left > r_idx || right < l_idx){
+        return INT_MAX;
+    }
+    if(l_idx <= left && r_idx >= right){
+        return tree[node];
+    }
+    int mid = left + (right - left) / 2;
+    int min1 = query(left, mid, 2 * node, l_idx, r_idx);
+    int min2 = query(mid + 1, right, 2 * node + 1, l_idx, r_idx);
+    return min(min1, min2);
+}

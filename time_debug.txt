@@ -1,0 +1,6 @@
+#define get_time(elapsed) chrono::duration_cast<chrono::microseconds>(elapsed).count() / 1000.0;
+
+auto start = chrono::high_resolution_clock::now();
+auto elapsed = chrono::high_resolution_clock::now() - start;
+ld time = get_time(elapsed);
+cerr << time << " ms\n";

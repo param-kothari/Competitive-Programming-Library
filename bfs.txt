@@ -1,0 +1,19 @@
+void bfs(int root){
+    queue<int> q;
+    vis[root] = 1;
+    path[root] = -1;
+    q.push(root);
+    while(!q.empty()){
+        int v = q.front();
+        q.pop();
+        for(auto u : adj[v]){
+            if(vis[u] == 0){
+                vis[u] = 1;
+                q.push(u);
+                depth[u] = depth[v] + 1;
+                path[u] = v;
+            }
+        }
+    }
+    return;
+}

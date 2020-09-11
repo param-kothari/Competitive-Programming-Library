@@ -1,0 +1,11 @@
+ll fact[maxN] = {0};
+
+void fill(ll n){
+	fact[0] = 1;
+	fact[1] = 1;
+	for(ll i = 2; i <= n; i++){
+		fact[i] = fact[i - 1] * i;
+		fact[i] %= MOD;
+	}
+	return;
+}

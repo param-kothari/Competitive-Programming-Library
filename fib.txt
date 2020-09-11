@@ -1,0 +1,12 @@
+ll fib[maxN];
+
+void fill(){
+    fib[0] = 1;
+    fib[1] = 1;
+    fib[2] = 2;
+    for(ll i = 3; i < maxN; i++){
+        fib[i] = fib[i - 1] + fib[i - 2];
+        fib[i] %= MOD;
+    }
+    return;
+}

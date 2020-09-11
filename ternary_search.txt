@@ -1,0 +1,23 @@
+// eval() = Evaluation function
+
+while(high - low >= 3){
+    ll mid1 = low + (high - low) / 3;
+    ll mid2 = high - (high - low) / 3;
+    ll curr1 = eval(mid1);
+    ll curr2 = eval(mid2);
+    if(curr1 < curr2){
+        high = mid2;
+    }
+    else{
+        low = mid1;
+    }
+}
+ll val = eval(low);
+ll res = low;
+for(ll i = low + 1; i <= high; i++){
+    ll temp = eval(i);
+    if(temp < val){
+        val = temp;
+        res = i;
+    }
+}

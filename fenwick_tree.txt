@@ -1,0 +1,16 @@
+// One-based indexing
+
+void update(int idx, int val){
+    for(int i = idx; i <= n; i += (i & (-i))){
+        tree[i] += val;
+    }
+    return;
+}
+
+int query(int idx){
+    int res = 0;
+    for(int i = idx; i > 0; i -= (i & (-i))){
+        res += tree[i];
+    }
+    return res;
+}

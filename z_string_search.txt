@@ -1,0 +1,44 @@
+int z[maxN];
+
+void z_fill(string s){
+    int l = 0, r = 0;
+    int n = (int)s.size();
+    for(int i = 1; i < n; i++){
+        if(i > r){
+            l = i;
+            r = i;
+            while(r < n && s[r] == s[r - l]){
+                r++;
+            }
+            z[i] = r - l;
+            r--;
+        }
+        else{
+            int idx=  i - l;
+            if(z[idx] + i <= r){
+                z[i] = z[idx];
+            }
+            else{
+                l = i;
+                while(r < n && s[r] == s[r - l]){
+                    r++;
+                }
+                z[i] = r - l;
+            }
+        }
+    }
+    return;
+}
+
+vector<int> z_search(string s, string t){
+    string str = t + '#' + s;
+    int n = (int)str.size();
+    z_fill(str);
+    vector<int> res;
+    for(int i = 0; i < n; i++){
+        if(z[i] == (int)t.size()){
+            res.pb(i - (int)t.size() - 1);
+        }
+    }
+    return res;
+}
