@@ -1,0 +1,36 @@
+const ll maxN = 100005, inf = 1000000000;
+
+ll vis[maxN] = {0};
+
+void solve(){
+    ll n, e;
+    cin >> n >> e;
+    vector<vector<ll> > adj(n + 1, vector<ll> (n + 1));
+    memset(vis, 0, sizeof(vis));
+    for(ll i = 0; i < e; i++){
+        ll v1, v2, wt;
+        cin >> v1 >> v2 >> wt;
+        adj[v1][v2] = wt;
+        adj[v2][v1] = wt;
+    }
+    vector<ll> dist(n + 1, inf);
+    dist[0] = 0;
+    for(int i = 0; i < n - 1; i++){
+        ll curr = -1;
+        for(int j = 0; j < n; j++){
+            if(vis[j] == 0 && (curr == -1 || dist[curr] > dist[j])){
+                curr = j;
+            }
+        }
+        vis[curr] = 1;
+        for(int j = 0; j < n; j++){
+            if(vis[j] == 0 && adj[curr][j] != 0 && (dist[j] > dist[curr] + adj[curr][j])){
+                dist[j] = dist[curr] + adj[curr][j];
+            }
+        }
+    }
+    for(int i = 0; i < n; i++){
+        cout << i << " " << dist[i] << "\n";
+    }
+    return;
+}

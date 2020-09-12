@@ -1,0 +1,44 @@
+const ll maxN = 100005, inf = 1000000000;
+
+struct edge{
+    ll weight = inf;
+    ll parent = -1;
+};
+
+ll vis[maxN] = {0};
+
+void solve(){
+    ll n, e;
+    cin >> n >> e;
+    vector<vector<ll> > adj(n + 1, vector<ll> (n + 1));
+    vector<edge> res(n);
+    memset(vis, 0, sizeof(vis));
+    for(ll i = 0; i < e; i++){
+        ll v1, v2, wt;
+        cin >> v1 >> v2 >> wt;
+        adj[v1][v2] = wt;
+        adj[v2][v1] = wt;
+    }
+    ll root = 0;
+    res[root].weight = 0;
+    res[root].parent = -1;
+    for(ll i = 0; i < n - 1; i++){
+        ll curr = -1;
+        for(ll j = 0; j < n; j++){
+            if(vis[j] == 0 && ((curr == -1) || (res[curr].weight > res[j].weight))){
+                curr = j;
+            }
+        }
+        vis[curr] = 1;
+        for(ll j = 0; j < n; j++){
+            if(adj[curr][j] != 0 && vis[j] == 0 && adj[curr][j] < res[j].weight){
+                res[j].parent = curr;
+                res[j].weight = adj[curr][j];
+            }
+        }
+    }
+    for(ll i = 1; i < n; i++){
+        cout << min(i, res[i].parent) << " " << max(i, res[i].parent) << " " << adj[i][res[i].parent] << "\n";
+    }
+    return;
+}
