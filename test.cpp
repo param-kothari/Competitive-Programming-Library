@@ -16,19 +16,19 @@ typedef long double ld;
 
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
-int solve1(){
+int solve1 () {
     
 }
 
-int solve2(){
+int solve2 () {
     
 }
 
-int main(){
+int main () {
     IOS;
     int t = 1000;
     // cin >> t;
-    for(int i = 0; i < t; i++){
+    for (int i = 0; i < t; i++) {
         
     }
     return 0;
