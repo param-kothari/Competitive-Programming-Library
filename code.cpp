@@ -14,16 +14,16 @@ using namespace std;
 typedef long long ll;
 typedef long double ld;
 
-void solve(){
+void solve () {
 
     return;
 }
 
-int main(){
+int main () {
     IOS;
     int t = 1;
     // cin >> t;
-    for(int i = 1; i <= t; i++){
+    for (int i = 1; i <= t; i++) {
         solve();
     }
     return 0;
